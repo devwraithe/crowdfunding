@@ -8,3 +8,10 @@ pub struct CampaignState {
     pub amount_raised: u64,
     pub deadline: u64,
 }
+
+#[derive(BorshSerialize, BorshDeserialize, Debug)]
+pub struct DonationState {
+    pub campaign: Pubkey,
+    pub donor: Pubkey,
+    pub amount: u64,
+}

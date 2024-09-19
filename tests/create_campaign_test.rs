@@ -2,22 +2,19 @@ use borsh::BorshDeserialize;
 use multi_sig_wallet::instruction::ProgramInstruction;
 use multi_sig_wallet::process_instruction;
 use multi_sig_wallet::state::CampaignState;
-use solana_program::instruction::AccountMeta;
-use solana_program::rent::Rent;
-use solana_program::{instruction::Instruction, msg, pubkey::Pubkey, sysvar};
 use solana_program_test::*;
-use solana_sdk::account::Account;
-use solana_sdk::signature::Keypair;
-use solana_sdk::signer::Signer;
-use solana_sdk::transaction::Transaction;
-use solana_sdk::transport::TransportError;
+use solana_sdk::{
+    account::Account, instruction::AccountMeta, instruction::Instruction, msg, pubkey::Pubkey,
+    rent::Rent, signature::Keypair, signer::Signer, sysvar, transaction::Transaction,
+    transport::TransportError,
+};
 use std::mem::size_of;
 
 #[tokio::test]
-async fn test_create_campaign() -> Result<(), TransportError> {
+pub async fn create_campaign_test() -> Result<(), TransportError> {
     let program_id = Pubkey::new_unique();
     let mut program_test = ProgramTest::new(
-        "crowdfunding_program",
+        "crowdfunding_program::create",
         program_id,
         processor!(process_instruction),
     );
@@ -59,8 +56,8 @@ async fn test_create_campaign() -> Result<(), TransportError> {
             deadline: 0,
         },
         vec![
-            AccountMeta::new(creator_keypair.pubkey(), true),
             AccountMeta::new(campaign_keypair.pubkey(), false),
+            AccountMeta::new(creator_keypair.pubkey(), true),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
         ],
     );
