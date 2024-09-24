@@ -15,3 +15,11 @@ pub struct DonationState {
     pub donor: Pubkey,
     pub amount: u64,
 }
+
+#[derive(BorshSerialize, BorshDeserialize, Debug)]
+pub struct WithdrawState {
+    pub campaign: Pubkey,
+    pub creator: Pubkey,
+    pub recipient: Pubkey,
+    pub amount: u64,
+}

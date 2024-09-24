@@ -14,6 +14,12 @@ pub enum ProgramInstruction {
         donor: Pubkey,
         amount: u64,
     },
+    WithdrawFunds {
+        campaign: Pubkey,  // account to withdraw from
+        creator: Pubkey,   // authority to withdraw funds
+        recipient: Pubkey, // account to withdraw to
+        amount: u64,       // amount to withdraw
+    },
 }
 
 impl ProgramInstruction {
@@ -23,7 +29,7 @@ impl ProgramInstruction {
             .ok_or(ProgramError::InvalidInstructionData)?;
         Ok(match tag {
             0 => {
-                let payload = CreateCampaign::try_from_slice(rest).unwrap();
+                let payload = CreateCampaignPayload::try_from_slice(rest).unwrap();
                 Self::CreateCampaign {
                     creator: payload.creator,
                     goal: payload.goal,
@@ -32,10 +38,19 @@ impl ProgramInstruction {
                 }
             }
             1 => {
-                let payload = DonateFunds::try_from_slice(rest).unwrap();
+                let payload = DonateFundsPayload::try_from_slice(rest).unwrap();
                 Self::DonateFunds {
                     campaign: payload.campaign,
                     donor: payload.donor,
+                    amount: payload.amount,
+                }
+            }
+            2 => {
+                let payload = WithdrawFundsPayload::try_from_slice(rest).unwrap();
+                Self::WithdrawFunds {
+                    campaign: payload.campaign,
+                    creator: payload.creator,
+                    recipient: payload.recipient,
                     amount: payload.amount,
                 }
             }
@@ -45,7 +60,7 @@ impl ProgramInstruction {
 }
 
 #[derive(BorshDeserialize)]
-pub struct CreateCampaign {
+pub struct CreateCampaignPayload {
     creator: Pubkey,
     goal: u64,
     amount_raised: u64,
@@ -53,8 +68,16 @@ pub struct CreateCampaign {
 }
 
 #[derive(BorshDeserialize)]
-pub struct DonateFunds {
+pub struct DonateFundsPayload {
     campaign: Pubkey,
     donor: Pubkey,
+    amount: u64,
+}
+
+#[derive(BorshDeserialize)]
+pub struct WithdrawFundsPayload {
+    campaign: Pubkey,
+    creator: Pubkey,
+    recipient: Pubkey,
     amount: u64,
 }

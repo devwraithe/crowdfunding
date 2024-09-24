@@ -1,36 +1,36 @@
+use multi_sig_wallet::instruction::ProgramInstruction;
+use multi_sig_wallet::process_instruction;
+use multi_sig_wallet::state::{CampaignState, DonationState, WithdrawState};
+use solana_program::instruction::{AccountMeta, Instruction};
+use solana_program::pubkey::Pubkey;
+use solana_program::rent::Rent;
+use solana_program::{sysvar};
 use solana_program_test::{processor, tokio, ProgramTest};
-use solana_sdk::{
-    account::Account,
-    instruction::{AccountMeta, Instruction},
-    pubkey::Pubkey,
-    rent::Rent,
-    signature::{Keypair, Signer},
-    sysvar,
-    transaction::Transaction,
-    transport::TransportError,
-};
-use multi_sig_wallet::{
-    instruction::ProgramInstruction,
-    process_instruction,
-    state::{CampaignState, DonationState},
-};
+use solana_sdk::account::Account;
+use solana_sdk::signature::{Keypair, Signer};
+use solana_sdk::transaction::Transaction;
+use solana_sdk::transport::TransportError;
 
 #[tokio::test]
-async fn donate_to_campaign_test() -> Result<(), TransportError> {
+async fn crowdfunding_program_test() -> Result<(), TransportError> {
     let program_id = Pubkey::new_unique();
     let mut program_test = ProgramTest::new(
-        "crowdfunding_program::donate",
+        "crowdfunding_program",
         program_id,
         processor!(process_instruction),
     );
 
     let campaign_keypair = Keypair::new();
     let donation_keypair = Keypair::new();
+    let withdraw_keypair = Keypair::new();
+    let recipient_keypair = Keypair::new();
 
     let rent = Rent::default();
     let campaign_account_size = size_of::<CampaignState>();
     let donation_account_size = size_of::<DonationState>();
+    let withdraw_account_size = size_of::<WithdrawState>();
     let campaign_account_rent = rent.minimum_balance(campaign_account_size);
+    let withdraw_account_rent = rent.minimum_balance(withdraw_account_size);
 
     program_test.add_account(
         campaign_keypair.pubkey(),
@@ -47,6 +47,15 @@ async fn donate_to_campaign_test() -> Result<(), TransportError> {
         Account {
             lamports: 1_000_000_000_000,
             data: vec![0; donation_account_size],
+            owner: program_id,
+            ..Account::default()
+        },
+    );
+    program_test.add_account(
+        withdraw_keypair.pubkey(),
+        Account {
+            lamports: withdraw_account_rent,
+            data: vec![0; withdraw_account_size],
             owner: program_id,
             ..Account::default()
         },
@@ -91,6 +100,27 @@ async fn donate_to_campaign_test() -> Result<(), TransportError> {
 
     let mut transaction = Transaction::new_with_payer(&[instruction], Some(&payer.pubkey()));
     transaction.sign(&[&payer, &donation_keypair], recent_blockhash);
+    banks_client.process_transaction(transaction).await?;
+
+    // withdraw funds
+    let instruction = Instruction::new_with_borsh(
+        program_id,
+        &ProgramInstruction::WithdrawFunds {
+            campaign: campaign_keypair.pubkey(),
+            creator: withdraw_keypair.pubkey(),
+            recipient: recipient_keypair.pubkey(),
+            amount: 1_000_000_000,
+        },
+        vec![
+            AccountMeta::new(campaign_keypair.pubkey(), false),
+            AccountMeta::new(withdraw_keypair.pubkey(), true),
+            AccountMeta::new(recipient_keypair.pubkey(), false),
+            AccountMeta::new_readonly(sysvar::rent::id(), false),
+        ],
+    );
+
+    let mut transaction = Transaction::new_with_payer(&[instruction], Some(&payer.pubkey()));
+    transaction.sign(&[&payer, &withdraw_keypair], recent_blockhash);
     banks_client.process_transaction(transaction).await?;
 
     Ok(())

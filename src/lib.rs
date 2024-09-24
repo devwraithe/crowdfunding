@@ -4,7 +4,8 @@ use solana_program::{
 
 use instruction::ProgramInstruction;
 use modules::create_campaign::create_campaign;
-use modules::donate_funds::donate_to_campaign;
+use modules::donate_to_campaign::donate_to_campaign;
+use modules::withdraw_from_campaign::withdraw_from_campaign;
 
 pub mod instruction;
 mod modules;
@@ -35,6 +36,15 @@ pub fn process_instruction(
             amount,
         } => {
             donate_to_campaign(program_id, accounts, campaign, donor, amount)
+                .expect("TODO: panic message");
+        }
+        ProgramInstruction::WithdrawFunds {
+            campaign,
+            creator,
+            recipient,
+            amount,
+        } => {
+            withdraw_from_campaign(program_id, accounts, campaign, creator, recipient, amount)
                 .expect("TODO: panic message");
         }
     }
