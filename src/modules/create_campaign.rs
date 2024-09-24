@@ -1,12 +1,14 @@
 use crate::state::CampaignState;
 use borsh::BorshSerialize;
-use solana_program::account_info::{next_account_info, AccountInfo};
-use solana_program::entrypoint::ProgramResult;
-use solana_program::msg;
-use solana_program::program_error::ProgramError;
-use solana_program::pubkey::Pubkey;
-use solana_program::rent::Rent;
-use solana_program::sysvar::Sysvar;
+use solana_program::{
+    account_info::{next_account_info, AccountInfo},
+    entrypoint::ProgramResult,
+    msg,
+    program_error::ProgramError,
+    pubkey::Pubkey,
+    rent::Rent,
+    sysvar::Sysvar,
+};
 
 pub fn create_campaign(
     program_id: &Pubkey,
@@ -21,12 +23,14 @@ pub fn create_campaign(
     let campaign_account = next_account_info(account_info_iter)?;
     let creator_account = next_account_info(account_info_iter)?;
 
-    if !creator_account.is_signer {
-        return Err(ProgramError::MissingRequiredSignature);
+    if campaign_account.owner != program_id {
+        msg!("Campaign account must be owned by the program");
+        return Err(ProgramError::IncorrectProgramId);
     }
 
-    if campaign_account.owner != program_id {
-        return Err(ProgramError::IncorrectProgramId);
+    if !creator_account.is_signer {
+        msg!("Creator must sign the transaction");
+        return Err(ProgramError::MissingRequiredSignature);
     }
 
     let rent = Rent::get()?;

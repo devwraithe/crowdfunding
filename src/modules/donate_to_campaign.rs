@@ -18,6 +18,10 @@ pub fn donate_to_campaign(
     let campaign_account = next_account_info(account_info_iter)?;
     let donation_account = next_account_info(account_info_iter)?;
 
+    if campaign_account.owner != program_id {
+        msg!("Campaign account must be owned by the program");
+        return Err(ProgramError::IncorrectProgramId);
+    }
     if !campaign_account.is_writable {
         msg!("Campaign account must be writable");
         return Err(ProgramError::InvalidAccountData);
@@ -26,11 +30,6 @@ pub fn donate_to_campaign(
     if !donation_account.is_signer {
         msg!("Donor must sign the transaction");
         return Err(ProgramError::MissingRequiredSignature);
-    }
-
-    if campaign_account.owner != program_id {
-        msg!("Campaign account must be owned by the program");
-        return Err(ProgramError::IncorrectProgramId);
     }
 
     let mut donation_state = DonationState::try_from_slice(&donation_account.data.borrow())
