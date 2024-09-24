@@ -68,7 +68,7 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
         program_id,
         &ProgramInstruction::CreateCampaign {
             creator: donation_keypair.pubkey(),
-            goal: 10_000_000_000,
+            goal: 40_000_000_000,
             amount_raised: 0,
             deadline: 10_000_000_000,
         },
@@ -89,7 +89,7 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
         &ProgramInstruction::DonateFunds {
             campaign: campaign_keypair.pubkey(),
             donor: donation_keypair.pubkey(),
-            amount: 30_000_000_000,
+            amount: 20_000_000_000,
         },
         vec![
             AccountMeta::new(campaign_keypair.pubkey(), false),

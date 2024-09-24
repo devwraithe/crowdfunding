@@ -4,7 +4,7 @@ use solana_program::{
     native_token::lamports_to_sol, program_error::ProgramError, pubkey::Pubkey,
 };
 
-use crate::state::DonationState;
+use crate::state::{CampaignState, DonationState};
 
 pub fn donate_to_campaign(
     program_id: &Pubkey,
@@ -47,6 +47,11 @@ pub fn donate_to_campaign(
 
     // serialize the updated state back into the donation account
     donation_state.serialize(&mut &mut donation_account.data.borrow_mut()[..])?;
+
+    // update the campaign state with donation amount
+    let mut campaign_state = CampaignState::try_from_slice(&campaign_account.data.borrow())?;
+    campaign_state.amount_raised += donation_amount;
+    campaign_state.serialize(&mut &mut campaign_account.data.borrow_mut()[..])?;
 
     msg!(
         "✅ Donated {} SOL ({} Lamports) to {}",
