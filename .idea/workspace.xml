@@ -8,7 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c6e0892-4ab3-4c4b-a7e4-46abe13189f9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/instruction.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/instruction.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/create_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/create_campaign.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/donate_to_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/donate_to_campaign.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/withdraw_from_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/withdraw_from_campaign.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/state.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/tests.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.rs" afterDir="false" />
     </list>
@@ -58,39 +63,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Cargo.Test create_campaign.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test create_campaign_test (1).executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test create_campaign_test (2).executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test create_campaign_test.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test crowdfunding_program_test.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test donate_funds_test.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test donate_to_campaign_test.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test test_create_campaign.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test tests.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test withdraw_from_campaign_test (1).executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test withdraw_from_campaign_test.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test withdraw_funds_test.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Tests in 'tests' (1).executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Tests in 'tests'.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.CodyAccountHistoryMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyConvertUrlToCodebaseName&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyHistoryLlmMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/update-campaign-after-donation&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/admin/Documents/Development/Rust/sol_crowdfunding&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
-    &quot;org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon&quot;: &quot;&quot;,
-    &quot;org.rust.disableDetachedFileInspection/Users/admin/Documents/Development/Rust/sol_crowdfunding/tests/modules/create_campaign_test.rs&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;language.rust.cargo.check&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Cargo.Test ::tests.executor": "Run",
+    "Cargo.Test create_campaign.executor": "Run",
+    "Cargo.Test create_campaign_test (1).executor": "Run",
+    "Cargo.Test create_campaign_test (2).executor": "Run",
+    "Cargo.Test create_campaign_test.executor": "Run",
+    "Cargo.Test crowdfunding_program_test.executor": "Run",
+    "Cargo.Test donate_funds_test.executor": "Run",
+    "Cargo.Test donate_to_campaign_test.executor": "Run",
+    "Cargo.Test test_create_campaign.executor": "Run",
+    "Cargo.Test tests.executor": "Run",
+    "Cargo.Test withdraw_from_campaign_test (1).executor": "Run",
+    "Cargo.Test withdraw_from_campaign_test.executor": "Run",
+    "Cargo.Test withdraw_funds_test.executor": "Run",
+    "Cargo.Tests in 'tests' (1).executor": "Run",
+    "Cargo.Tests in 'tests'.executor": "Run",
+    "RunOnceActivity.CodyAccountHistoryMigration": "true",
+    "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
+    "RunOnceActivity.CodyHistoryLlmMigration": "true",
+    "RunOnceActivity.CodyProjectSettingsMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "git-widget-placeholder": "refactor/error-handling",
+    "last_opened_file_path": "/Users/admin/Documents/Development/Rust/sol_crowdfunding",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
+    "org.rust.disableDetachedFileInspection/Users/admin/Documents/Development/Rust/sol_crowdfunding/tests/modules/create_campaign_test.rs": "true",
+    "settings.editor.selected.configurable": "language.rust.cargo.check"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/tests" />
@@ -99,8 +105,8 @@
     </key>
   </component>
   <component name="RunManager" selected="Cargo.Test crowdfunding_program_test">
-    <configuration name="Test crowdfunding_program_test" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
-      <option name="command" value="test --package multi_sig_wallet --test tests crowdfunding_program_test -- --exact" />
+    <configuration name="Test ::tests" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="command" value="test --package multi_sig_wallet --test tests &quot;&quot;" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$" />
       <envs />
       <option name="emulateTerminal" value="true" />
@@ -116,8 +122,8 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test donate_to_campaign_test" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
-      <option name="command" value="test --package multi_sig_wallet --test donate_funds_test donate_to_campaign_test -- --exact" />
+    <configuration name="Test crowdfunding_program_test" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="command" value="test --package multi_sig_wallet --test tests crowdfunding_program_test -- --exact" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$" />
       <envs />
       <option name="emulateTerminal" value="true" />
@@ -204,10 +210,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Cargo.Test crowdfunding_program_test" />
+        <item itemvalue="Cargo.Test ::tests" />
         <item itemvalue="Cargo.Tests in 'tests'" />
         <item itemvalue="Cargo.Test withdraw_from_campaign_test (1)" />
         <item itemvalue="Cargo.Test withdraw_from_campaign_test" />
-        <item itemvalue="Cargo.Test donate_to_campaign_test" />
       </list>
     </recent_temporary>
   </component>

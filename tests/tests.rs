@@ -1,15 +1,21 @@
-use multi_sig_wallet::instruction::ProgramInstruction;
-use multi_sig_wallet::process_instruction;
-use multi_sig_wallet::state::{CampaignState, DonationState, WithdrawState};
-use solana_program::instruction::{AccountMeta, Instruction};
-use solana_program::pubkey::Pubkey;
-use solana_program::rent::Rent;
-use solana_program::{sysvar};
+use multi_sig_wallet::{
+    instruction::ProgramInstruction,
+    process_instruction,
+    state::{CampaignState, DonationState, WithdrawState},
+};
+use solana_program::{
+    instruction::{AccountMeta, Instruction},
+    pubkey::Pubkey,
+    rent::Rent,
+    sysvar,
+};
 use solana_program_test::{processor, tokio, ProgramTest};
-use solana_sdk::account::Account;
-use solana_sdk::signature::{Keypair, Signer};
-use solana_sdk::transaction::Transaction;
-use solana_sdk::transport::TransportError;
+use solana_sdk::{
+    account::Account,
+    signature::{Keypair, Signer},
+    transaction::Transaction,
+    transport::TransportError,
+};
 
 #[tokio::test]
 async fn crowdfunding_program_test() -> Result<(), TransportError> {
@@ -70,7 +76,6 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
             creator: donation_keypair.pubkey(),
             goal: 40_000_000_000,
             amount_raised: 0,
-            deadline: 10_000_000_000,
         },
         vec![
             AccountMeta::new(campaign_keypair.pubkey(), false),
@@ -81,7 +86,7 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
 
     let mut create_tx = Transaction::new_with_payer(&[create_instruction], Some(&payer.pubkey()));
     create_tx.sign(&[&payer, &donation_keypair], recent_blockhash);
-    banks_client.process_transaction(create_tx).await?;
+    banks_client.process_transaction(create_tx).await.expect("Create campaign failed");
 
     // donate funds to created campaign
     let instruction = Instruction::new_with_borsh(
@@ -100,7 +105,7 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
 
     let mut transaction = Transaction::new_with_payer(&[instruction], Some(&payer.pubkey()));
     transaction.sign(&[&payer, &donation_keypair], recent_blockhash);
-    banks_client.process_transaction(transaction).await?;
+    banks_client.process_transaction(transaction).await.expect("Donation failed");
 
     // withdraw funds
     let instruction = Instruction::new_with_borsh(
@@ -121,7 +126,7 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
 
     let mut transaction = Transaction::new_with_payer(&[instruction], Some(&payer.pubkey()));
     transaction.sign(&[&payer, &withdraw_keypair], recent_blockhash);
-    banks_client.process_transaction(transaction).await?;
+    banks_client.process_transaction(transaction).await.expect("Withdrawal failed");
 
     Ok(())
 }
