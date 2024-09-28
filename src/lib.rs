@@ -25,18 +25,15 @@ pub fn process_instruction(
             creator,
             goal,
             amount_raised,
-            deadline,
         } => {
-            create_campaign(program_id, accounts, creator, goal, amount_raised, deadline)
-                .expect("TODO: panic message");
+            create_campaign(program_id, accounts, creator, goal, amount_raised)?;
         }
         ProgramInstruction::DonateFunds {
             campaign,
             donor,
             amount,
         } => {
-            donate_to_campaign(program_id, accounts, campaign, donor, amount)
-                .expect("TODO: panic message");
+            donate_to_campaign(program_id, accounts, campaign, donor, amount)?;
         }
         ProgramInstruction::WithdrawFunds {
             campaign,
@@ -44,8 +41,7 @@ pub fn process_instruction(
             recipient,
             amount,
         } => {
-            withdraw_from_campaign(program_id, accounts, campaign, creator, recipient, amount)
-                .expect("TODO: panic message");
+            withdraw_from_campaign(program_id, accounts, campaign, creator, recipient, amount)?;
         }
     }
 

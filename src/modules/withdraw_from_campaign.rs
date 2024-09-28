@@ -40,7 +40,10 @@ pub fn withdraw_from_campaign(
     }
 
     let mut withdrawal_state = WithdrawState::try_from_slice(&withdrawal_account.data.borrow())
-        .expect("Error deserializing WithdrawState");
+        .map_err(|err| {
+            msg!("Error deserializing WithdrawState: {}", err);
+            ProgramError::InvalidAccountData
+        })?;
 
     withdrawal_state.amount = amount;
     withdrawal_state.campaign = campaign;
@@ -62,7 +65,12 @@ pub fn withdraw_from_campaign(
     **campaign_account.try_borrow_mut_lamports()? -= withdrawal_amount;
     **withdrawal_account.try_borrow_mut_lamports()? += withdrawal_amount;
 
-    withdrawal_state.serialize(&mut &mut withdrawal_account.data.borrow_mut()[..])?;
+    withdrawal_state
+        .serialize(&mut &mut withdrawal_account.data.borrow_mut()[..])
+        .map_err(|err| {
+            msg!("Error serializing withdrawal account: {}", err);
+            ProgramError::InvalidAccountData
+        })?;
 
     msg!(
         "✅ Withdrawn {} SOL ({} Lamports) from {} to {} by {}",

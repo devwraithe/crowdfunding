@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChatHistory">
+    <accountData>
+      <list>
+        <AccountData>
+          <accountId value="VXNlcjo1MTg0OTA=" />
+          <chats>
+            <list>
+              <chat>
+                <internalId value="53c73457-626b-48a6-9fc7-0c5ad62ea864" />
+              </chat>
+              <chat>
+                <internalId value="bffba367-0258-4c9a-afd6-c46ddcb9ed4e" />
+              </chat>
+              <chat>
+                <internalId value="c095e0e8-3719-4a48-a97b-2d21c69592f2" />
+              </chat>
+              <chat>
+                <internalId value="0a757913-7e32-4941-952d-0434437b833c" />
+              </chat>
+              <chat>
+                <internalId value="45fe69d6-9a32-44e0-9324-46639a22874a" />
+              </chat>
+              <chat>
+                <internalId value="89c9b430-2db6-4b85-89e5-4f8dc0b7229d" />
+              </chat>
+              <chat>
+                <internalId value="a3670c82-9a00-4b8a-8779-6c5f7dc98037" />
+              </chat>
+              <chat>
+                <internalId value="319292dc-1f69-4642-95d5-2361d182c54d" />
+              </chat>
+            </list>
+          </chats>
+        </AccountData>
+      </list>
+    </accountData>
+  </component>
+</project>

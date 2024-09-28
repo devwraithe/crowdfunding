@@ -16,7 +16,6 @@ pub fn create_campaign(
     creator: Pubkey,
     goal: u64,
     amount_raised: u64,
-    deadline: u64,
 ) -> ProgramResult {
     let account_info_iter = &mut accounts.iter();
 
@@ -35,6 +34,7 @@ pub fn create_campaign(
 
     let rent = Rent::get()?;
     if !rent.is_exempt(campaign_account.lamports(), campaign_account.data_len()) {
+        msg!("Campaign account must be rent exempt");
         return Err(ProgramError::AccountNotRentExempt);
     }
 
@@ -42,10 +42,14 @@ pub fn create_campaign(
         creator,
         goal,
         amount_raised,
-        deadline,
     };
 
-    campaign_state.serialize(&mut &mut campaign_account.data.borrow_mut()[..])?;
+    campaign_state
+        .serialize(&mut &mut campaign_account.data.borrow_mut()[..])
+        .map_err(|err| {
+            msg!("Error serializing campaign account: {}", err);
+            ProgramError::InvalidAccountData
+        })?;
 
     msg!("✅ New campaign created!");
 

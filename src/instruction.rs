@@ -7,7 +7,6 @@ pub enum ProgramInstruction {
         creator: Pubkey,
         goal: u64,
         amount_raised: u64,
-        deadline: u64,
     },
     DonateFunds {
         campaign: Pubkey,
@@ -34,7 +33,6 @@ impl ProgramInstruction {
                     creator: payload.creator,
                     goal: payload.goal,
                     amount_raised: payload.amount_raised,
-                    deadline: payload.deadline,
                 }
             }
             1 => {
@@ -64,7 +62,6 @@ pub struct CreateCampaignPayload {
     creator: Pubkey,
     goal: u64,
     amount_raised: u64,
-    deadline: u64,
 }
 
 #[derive(BorshDeserialize)]
