@@ -9,12 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6c6e0892-4ab3-4c4b-a7e4-46abe13189f9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/instruction.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/instruction.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/create_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/create_campaign.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/donate_to_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/donate_to_campaign.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/withdraw_from_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/withdraw_from_campaign.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/tests.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +81,7 @@
     "RunOnceActivity.CodyProjectSettingsMigration": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
-    "git-widget-placeholder": "refactor/error-handling",
+    "git-widget-placeholder": "feature/verify-donor-lamports",
     "last_opened_file_path": "/Users/admin/Documents/Development/Rust/sol_crowdfunding",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
