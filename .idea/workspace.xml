@@ -10,7 +10,6 @@
     <list default="true" id="6c6e0892-4ab3-4c4b-a7e4-46abe13189f9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/donate_to_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/donate_to_campaign.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +80,7 @@
     "RunOnceActivity.CodyProjectSettingsMigration": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
-    "git-widget-placeholder": "feature/verify-donor-lamports",
+    "git-widget-placeholder": "feature/validate-campaign-account",
     "last_opened_file_path": "/Users/admin/Documents/Development/Rust/sol_crowdfunding",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",

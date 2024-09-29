@@ -38,6 +38,12 @@ pub fn donate_to_campaign(
         return Err(ProgramError::InsufficientFunds);
     }
 
+    // validate campaign argument matches account key
+    if campaign != *campaign_account.key {
+        msg!("Campaign argument does not match account key");
+        return Err(ProgramError::InvalidArgument);
+    }
+
     let mut donation_state = DonationState::try_from_slice(&donation_account.data.borrow())
         .map_err(|err| {
             msg!("Error deserializing DonationState: {}", err);
