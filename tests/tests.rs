@@ -51,7 +51,7 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
     program_test.add_account(
         donation_keypair.pubkey(),
         Account {
-            lamports: 1_000_000_000_000,
+            lamports: 10_000_000_000,
             data: vec![0; donation_account_size],
             owner: program_id,
             ..Account::default()
@@ -94,7 +94,7 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
         &ProgramInstruction::DonateFunds {
             campaign: campaign_keypair.pubkey(),
             donor: donation_keypair.pubkey(),
-            amount: 20_000_000_000,
+            amount: 5_000_000_000,
         },
         vec![
             AccountMeta::new(campaign_keypair.pubkey(), false),

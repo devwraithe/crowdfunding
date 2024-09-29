@@ -32,6 +32,12 @@ pub fn donate_to_campaign(
         return Err(ProgramError::MissingRequiredSignature);
     }
 
+    // verify donor has enough lamports to donate
+    if donation_account.lamports() < amount {
+        msg!("Donor does not have enough lamports to donate");
+        return Err(ProgramError::InsufficientFunds);
+    }
+
     let mut donation_state = DonationState::try_from_slice(&donation_account.data.borrow())
         .map_err(|err| {
             msg!("Error deserializing DonationState: {}", err);
