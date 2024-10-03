@@ -8,8 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c6e0892-4ab3-4c4b-a7e4-46abe13189f9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/withdraw_from_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/withdraw_from_campaign.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +32,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/lamports-transfer-safety" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -204,10 +209,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Cargo.Test crowdfunding_program_test" />
-        <item itemvalue="Cargo.Test ::tests" />
         <item itemvalue="Cargo.Tests in 'tests'" />
         <item itemvalue="Cargo.Test withdraw_from_campaign_test (1)" />
         <item itemvalue="Cargo.Test withdraw_from_campaign_test" />
+        <item itemvalue="Cargo.Test ::tests" />
       </list>
     </recent_temporary>
   </component>

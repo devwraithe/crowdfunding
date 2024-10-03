@@ -59,6 +59,7 @@ pub fn withdraw_from_campaign(
 
     let withdrawal_amount = withdrawal_state.amount;
 
+    // Verify that there are enough funds to withdraw
     if **campaign_account.lamports.borrow() < withdrawal_amount {
         msg!("Insufficient funds in the campaign account");
         return Err(ProgramError::InsufficientFunds);
