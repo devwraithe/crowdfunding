@@ -32,13 +32,13 @@ pub fn donate_to_campaign(
         return Err(ProgramError::MissingRequiredSignature);
     }
 
-    // verify donor has enough lamports to donate
+    // Verify donor has enough lamports to donate
     if donation_account.lamports() < amount {
         msg!("Donor does not have enough lamports to donate");
         return Err(ProgramError::InsufficientFunds);
     }
 
-    // validate campaign argument matches account key
+    // Validate campaign argument matches account key
     if campaign != *campaign_account.key {
         msg!("Campaign argument does not match account key");
         return Err(ProgramError::InvalidArgument);
@@ -50,7 +50,7 @@ pub fn donate_to_campaign(
             ProgramError::InvalidAccountData
         })?;
 
-    // update the donation state with the new data
+    // Update the donation state with the new data
     donation_state.amount = amount;
     donation_state.campaign = campaign;
     donation_state.donor = donor;
@@ -60,7 +60,7 @@ pub fn donate_to_campaign(
     **donation_account.try_borrow_mut_lamports()? -= donation_amount;
     **campaign_account.try_borrow_mut_lamports()? += donation_amount;
 
-    // serialize the updated state back into the donation account
+    // Serialize the updated state back into the donation account
     donation_state
         .serialize(&mut &mut donation_account.data.borrow_mut()[..])
         .map_err(|err| {
@@ -68,24 +68,26 @@ pub fn donate_to_campaign(
             ProgramError::InvalidAccountData
         })?;
 
-    // update the campaign state with donation amount
+    // Update the campaign state with donation amount
     let mut campaign_state = CampaignState::try_from_slice(&campaign_account.data.borrow())
         .map_err(|err| {
             msg!("Error deserializing CampaignState: {}", err);
             ProgramError::InvalidAccountData
         })?;
+
     campaign_state.amount_raised += donation_amount;
     campaign_state
         .serialize(&mut &mut campaign_account.data.borrow_mut()[..])
         .map_err(|err| {
-            msg!("Error serializing campaign account: {}", err);
+            msg!("Error serializing CampaignState: {}", err);
             ProgramError::InvalidAccountData
         })?;
 
     msg!(
-        "✅ Donated {} SOL ({} Lamports) to {}",
+        "✅ Donated {} SOL ({} Lamports) from {} to {}",
         lamports_to_sol(donation_amount),
         donation_amount,
+        donation_account.key,
         campaign_account.key
     );
 

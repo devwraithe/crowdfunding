@@ -27,8 +27,8 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
     );
 
     let campaign_keypair = Keypair::new();
-    let donation_keypair = Keypair::new();
-    let withdraw_keypair = Keypair::new();
+    let creator_keypair = Keypair::new();
+    let donor_keypair = Keypair::new();
     let recipient_keypair = Keypair::new();
 
     let rent = Rent::default();
@@ -49,7 +49,7 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
     );
 
     program_test.add_account(
-        donation_keypair.pubkey(),
+        donor_keypair.pubkey(),
         Account {
             lamports: 10_000_000_000,
             data: vec![0; donation_account_size],
@@ -58,7 +58,7 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
         },
     );
     program_test.add_account(
-        withdraw_keypair.pubkey(),
+        creator_keypair.pubkey(),
         Account {
             lamports: withdraw_account_rent,
             data: vec![0; withdraw_account_size],
@@ -69,42 +69,42 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
 
     let (mut banks_client, payer, recent_blockhash) = program_test.start().await;
 
-    // create a new campaign
+    /* Create a new campaign */
     let create_instruction = Instruction::new_with_borsh(
         program_id,
         &ProgramInstruction::CreateCampaign {
-            creator: donation_keypair.pubkey(),
+            creator: creator_keypair.pubkey(),
             goal: 40_000_000_000,
             amount_raised: 0,
         },
         vec![
             AccountMeta::new(campaign_keypair.pubkey(), false),
-            AccountMeta::new(donation_keypair.pubkey(), true),
+            AccountMeta::new(creator_keypair.pubkey(), true),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
         ],
     );
 
     let mut create_tx = Transaction::new_with_payer(&[create_instruction], Some(&payer.pubkey()));
-    create_tx.sign(&[&payer, &donation_keypair], recent_blockhash);
+    create_tx.sign(&[&payer, &creator_keypair], recent_blockhash);
     banks_client.process_transaction(create_tx).await.expect("Create campaign failed");
 
-    // donate funds to created campaign
+    /* Donate funds to campaign */
     let instruction = Instruction::new_with_borsh(
         program_id,
         &ProgramInstruction::DonateFunds {
             campaign: campaign_keypair.pubkey(),
-            donor: donation_keypair.pubkey(),
+            donor: donor_keypair.pubkey(),
             amount: 5_000_000_000,
         },
         vec![
             AccountMeta::new(campaign_keypair.pubkey(), false),
-            AccountMeta::new(donation_keypair.pubkey(), true),
+            AccountMeta::new(donor_keypair.pubkey(), true),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
         ],
     );
 
     let mut transaction = Transaction::new_with_payer(&[instruction], Some(&payer.pubkey()));
-    transaction.sign(&[&payer, &donation_keypair], recent_blockhash);
+    transaction.sign(&[&payer, &donor_keypair], recent_blockhash);
     banks_client.process_transaction(transaction).await.expect("Donation failed");
 
     // withdraw funds
@@ -112,20 +112,20 @@ async fn crowdfunding_program_test() -> Result<(), TransportError> {
         program_id,
         &ProgramInstruction::WithdrawFunds {
             campaign: campaign_keypair.pubkey(),
-            creator: withdraw_keypair.pubkey(),
+            creator: creator_keypair.pubkey(),
             recipient: recipient_keypair.pubkey(),
             amount: 1_000_000_000,
         },
         vec![
             AccountMeta::new(campaign_keypair.pubkey(), false),
-            AccountMeta::new(withdraw_keypair.pubkey(), true),
+            AccountMeta::new(creator_keypair.pubkey(), true),
             AccountMeta::new(recipient_keypair.pubkey(), false),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
         ],
     );
 
     let mut transaction = Transaction::new_with_payer(&[instruction], Some(&payer.pubkey()));
-    transaction.sign(&[&payer, &withdraw_keypair], recent_blockhash);
+    transaction.sign(&[&payer, &creator_keypair], recent_blockhash);
     banks_client.process_transaction(transaction).await.expect("Withdrawal failed");
 
     Ok(())
