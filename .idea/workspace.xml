@@ -8,8 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c6e0892-4ab3-4c4b-a7e4-46abe13189f9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/cody_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cody_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/create_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/create_campaign.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/donate_to_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/donate_to_campaign.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/withdraw_from_campaign.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/withdraw_from_campaign.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tests.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +84,7 @@
     "RunOnceActivity.CodyProjectSettingsMigration": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
-    "git-widget-placeholder": "feature/validate-campaign-account",
+    "git-widget-placeholder": "feature/verify-account-ownership",
     "last_opened_file_path": "/Users/admin/Documents/Development/Rust/sol_crowdfunding",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -233,6 +237,7 @@
       <workItem from="1727076400632" duration="5054000" />
       <workItem from="1727086233418" duration="10770000" />
       <workItem from="1727154944595" duration="2646000" />
+      <workItem from="1727887251097" duration="4952000" />
     </task>
     <servers />
   </component>

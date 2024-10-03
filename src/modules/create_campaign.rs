@@ -47,7 +47,7 @@ pub fn create_campaign(
     campaign_state
         .serialize(&mut &mut campaign_account.data.borrow_mut()[..])
         .map_err(|err| {
-            msg!("Error serializing campaign account: {}", err);
+            msg!("Error serializing CampaignState: {}", err);
             ProgramError::InvalidAccountData
         })?;
 
